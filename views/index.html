@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>index</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function() {
+        $(".rename_input").hide();
+        $(".cancel_btn").hide();
+        $(".rename_btn").click(function() {
+            $(".rename_input").show();
+            $(".cancel_btn").show();
+            $(".file_name").hide();
+            $(".rename_btn").hide();
+        });
+        $(".cancel_btn").click(function() {
+            $(".rename_input").hide();
+            $(".cancel_btn").hide();
+            $(".file_name").show();
+            $(".rename_btn").show();
+        });
+    });
+    </script>
+</head>
+
+<body class="container">
+    <CENTER>
+        <h1>Files & Folders</h1></CENTER>
+    <ol>
+        {% for item in data %}
+        <li class="list-group-item list-group-item-warning">
+            Name : <span class="name">
+            <a id="file_name" href="#" class="list-group-item list-group-item-info"><span class="file_name">{{item.name}}</span>
+            <input id="rename_input" class="rename_input" type="text" placeholder="{{item.name}}">
+            <button id="cancel_btn" class="btn cancel_btn">Cancel</button>
+            </a>
+            </span>
+            <br>
+            <a id="rename_btn" class="btn btn-warning rename_btn">Rename file</a>
+            <a href="/file_info/{{item.id}}/{{item.name}}" class="btn btn-success">Download file</a>
+            <a href="/delete_file/{{item.id}}" class="btn btn-danger">Delete file</a>
+            <br> ID : <span class="name">{{item.id}}</span>
+            <br>
+        </li>
+        {% endfor %}
+    </ol>
+    <br>
+    <div style="display: inline-block;">
+    <kbd style="border: 2px solid yellow">Upload a file here : </kbd>
+	    <br>
+	    <br>
+	    <form action="/upload_file_in_folder" method="post" encType="multipart/form-data">
+	    	<input type="file" name="samplefile" class="list-group-item-success choosen_btn"> <br>
+	    	<input type="Submit" class="btn btn-success submit_btn">
+	    </form>
+    </div>
+    <kbd  style="float : right;">
+    	<a href="/main" class="btn" style="text-decoration: none; color : white;">back</a>
+    </kbd>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</body>
+
+</html>
